@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import './App.css';
+import './assets/main.css';
 import Break from './components/Break.jsx'
 import TimeLeft from './components/TimeLeft.jsx'
 import Session from './components/Session.jsx'
@@ -15,6 +15,19 @@ function App() {
   useEffect(() => {
       setTimeLeft(sessionLength); 
       }, [sessionLength]);
+
+      useEffect(() => {
+        if (timeLeft === 0) {
+        audioElement.current.play();
+        if(currentSessionType === 'Session'){
+        setCurrentSessionType('Break');
+        setTimeLeft(breakLength);
+        } else if (currentSessionType === 'Break') {
+        setCurrentSessionType('Session');
+        setTimeLeft(sessionLength);
+      }
+    }
+    }, [breakLength, currentSessionType, sessionLength, timeLeft])
 
   const decrementBreakLengthByOneMinute = () => {
       const newBreakLength = breakLength - 60;
@@ -87,9 +100,9 @@ setSessionLength(60 * 25)
 setBreakLength(60 * 5)
       //reset the time to 25 min (initial)
     setTimeLeft(60*25)
-    };
+    }
   return (
-    <div className="App">
+    <div className="flex flex-col h-screen items-center justify-center bg-green-400">
       <Break
       breakLength={breakLength}
       decrementBreakLengthByOneMinute={decrementBreakLengthByOneMinute}
