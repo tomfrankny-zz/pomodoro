@@ -8,7 +8,7 @@ module.exports = {
       md: '768px',
       lg: '1024px',
       xl: '1280px',
-      '2xl': '1536px',
+      '2xl': '1536px', 
     },
     colors: ({ colors }) => ({
       inherit: colors.inherit,
@@ -348,6 +348,7 @@ module.exports = {
       DEFAULT: '1',
     },
     fontFamily: {
+      clock: ['"Courgette", cursive'],
       sans: [
         'ui-sans-serif',
         'system-ui',

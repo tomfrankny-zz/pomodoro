@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 import './assets/main.css';
-import Break from './components/Break.jsx'
-import TimeLeft from './components/TimeLeft.jsx'
-import Session from './components/Session.jsx'
+import Break from './components/Break'
+import Session from './components/Session'
+import Time from './components/Time'
+
 
 function App() {
   const audioElement = useRef(null)
@@ -86,32 +87,25 @@ const handleStartStopClick = () => {
     }
 };
     const handleResetButtonClick = () => {
-      //reset the audio
       audioElement.current.load()
-      //clear the timeout
 clearInterval(intervalId)
-      //set the intervvalId null
 setIntervalId(null)
-      //set sessiontype to 'session''
 setCurrentSessionType('Session')
-      //reset session length to 25 min
 setSessionLength(60 * 25)
-      // reset break length to 5 min
 setBreakLength(60 * 5)
-      //reset the time to 25 min (initial)
     setTimeLeft(60*25)
     }
   return (
     <div className="flex flex-col h-screen items-center justify-center bg-green-400">
+      <div className='flex w-full justify-around'>
       <Break
       breakLength={breakLength}
       decrementBreakLengthByOneMinute={decrementBreakLengthByOneMinute}
       incrementBreakLengthByOneMinute={incrementBreakLengthByOneMinute}
        />
-       <TimeLeft
-       breakLength={breakLength}
-       handleStartStopClick={handleStartStopClick}
-       sessionLength={sessionLength}
+       <Time
+        handleResetButtonClick={handleResetButtonClick}
+        handleStartStopClick={handleStartStopClick}
        timerLabel={currentSessionType}
        startStopButtonLabel={isStarted ? 'Stop': 'Start'}
        timeLeft= {timeLeft} 
@@ -122,8 +116,8 @@ setBreakLength(60 * 5)
     decrementSessionLengthByOneMinute={decrementSessionLengthByOneMinute}
     incrementSessionLengthByOneMinute={incrementSessionLengthByOneMinute}
       />
-      <button id="reset"onClick={handleResetButtonClick}> 
-      Reset </button>
+  
+      </div>
       <audio id="beep" ref={audioElement}>
         <source src="https://onlineclock.net/audio/options/default.mp3" type="audio/mpeg" />
       </audio>
