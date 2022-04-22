@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import './assets/main.css';
-import Break from './components/Break'
-import Session from './components/Session'
-import Time from './components/Time'
+import Break from './src/components/Break'
+import Session from './src/components/Session'
+import Time from './src/components/Time'
 
 
 function App() {
